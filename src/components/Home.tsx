@@ -1,13 +1,16 @@
-import { Heading } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
+import Form from "./Form";
 
 function Home() {
   return (
-    <div>
+    <Flex direction={"column"} justifyContent={"center"} alignItems={"center"}>
       <Heading textAlign={"center"} bg={"green"}>
         {" "}
         YUP AND REACT QUERY TUTORIAL{" "}
       </Heading>
-    </div>
+
+      <Form />
+    </Flex>
   );
 }
 
