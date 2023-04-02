@@ -1,6 +1,3 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import {
   Button,
   Flex,
@@ -10,6 +7,9 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { FormSchema } from "../schemas/form.schema";
 
 const Form = () => {
   const {
@@ -17,7 +17,7 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(),
+    resolver: yupResolver(FormSchema),
   });
 
   const onsubmitData = (data: any) => {
@@ -26,8 +26,12 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit(onsubmitData)}>
-      <Flex justifyContent={"center"}>
-        <FormControl p="5" mx="10" w="100%">
+      <Flex justifyContent={"center"} direction={"column"}>
+        <FormControl
+          mx="10"
+          w="100%"
+          isInvalid={!!errors["firstname"]?.message}
+        >
           <FormLabel fontWeight={"bold"} my={"3"}>
             First name
           </FormLabel>
@@ -36,7 +40,13 @@ const Form = () => {
             placeholder="First name"
             {...register("firstname")}
           />
-          {errors.firstname?.message && <FormErrorMessage> </FormErrorMessage>}
+          {errors["firstname"]?.message && (
+            <FormErrorMessage>
+              {errors["firstname"].message as any}
+            </FormErrorMessage>
+          )}
+        </FormControl>
+        <FormControl mx="10" w="100%">
           <FormLabel fontWeight={"bold"} my={"3"}>
             Last name
           </FormLabel>
@@ -45,7 +55,8 @@ const Form = () => {
             placeholder="Last name"
             {...register("lastname")}
           />
-
+        </FormControl>
+        <FormControl mx="10" w="100%">
           <FormLabel fontWeight={"bold"} my={"3"}>
             Gender
           </FormLabel>
@@ -58,7 +69,8 @@ const Form = () => {
             <option value="female">female</option>
             <option value="other">other</option>
           </Select>
-
+        </FormControl>
+        <FormControl mx="10" w="100%">
           <FormLabel fontWeight={"bold"} my={"3"}>
             Email
           </FormLabel>
@@ -68,7 +80,8 @@ const Form = () => {
             placeholder="email"
             {...register("email")}
           />
-
+        </FormControl>
+        <FormControl mx="10" w="100%">
           <FormLabel fontWeight={"bold"} my={"3"}>
             password
           </FormLabel>
@@ -78,6 +91,8 @@ const Form = () => {
             placeholder=" password"
             {...register("password")}
           />
+        </FormControl>
+        <FormControl mx="10" w="100%">
           <FormLabel fontWeight={"bold"} my={"3"}>
             confirm password
           </FormLabel>
@@ -85,7 +100,7 @@ const Form = () => {
             id="confirmpassword"
             type="password"
             placeholder=" confirm password"
-            {...register("confirmPassword")}
+            {...register("confirmpassword")}
           />
 
           <Button my="2" w="100%" type="submit" colorScheme="green">
