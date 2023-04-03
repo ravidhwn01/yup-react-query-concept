@@ -46,7 +46,7 @@ const Form = () => {
             </FormErrorMessage>
           )}
         </FormControl>
-        <FormControl mx="10" w="100%">
+        <FormControl mx="10" w="100%" isInvalid={!!errors["lastname"]?.message}>
           <FormLabel fontWeight={"bold"} my={"3"}>
             Last name
           </FormLabel>
@@ -55,8 +55,13 @@ const Form = () => {
             placeholder="Last name"
             {...register("lastname")}
           />
+          {errors["lastname"]?.message && (
+            <FormErrorMessage>
+              {errors["lastname"].message as any}
+            </FormErrorMessage>
+          )}
         </FormControl>
-        <FormControl mx="10" w="100%">
+        <FormControl mx="10" w="100%" isInvalid={!!errors["gender"]?.message}>
           <FormLabel fontWeight={"bold"} my={"3"}>
             Gender
           </FormLabel>
@@ -69,8 +74,13 @@ const Form = () => {
             <option value="female">female</option>
             <option value="other">other</option>
           </Select>
+          {errors["gender"]?.message && (
+            <FormErrorMessage>
+              {errors["gender"].message as any}
+            </FormErrorMessage>
+          )}
         </FormControl>
-        <FormControl mx="10" w="100%">
+        <FormControl mx="10" w="100%" isInvalid={!!errors["email"]?.message}>
           <FormLabel fontWeight={"bold"} my={"3"}>
             Email
           </FormLabel>
@@ -80,8 +90,13 @@ const Form = () => {
             placeholder="email"
             {...register("email")}
           />
+          {errors["email"]?.message && (
+            <FormErrorMessage>
+              {errors["email"].message as any}
+            </FormErrorMessage>
+          )}
         </FormControl>
-        <FormControl mx="10" w="100%">
+        <FormControl mx="10" w="100%" isInvalid={!!errors["password"]?.message}>
           <FormLabel fontWeight={"bold"} my={"3"}>
             password
           </FormLabel>
@@ -91,8 +106,17 @@ const Form = () => {
             placeholder=" password"
             {...register("password")}
           />
+          {errors["password"]?.message && (
+            <FormErrorMessage>
+              {errors["password"].message as any}
+            </FormErrorMessage>
+          )}
         </FormControl>
-        <FormControl mx="10" w="100%">
+        <FormControl
+          mx="10"
+          w="100%"
+          isInvalid={!!errors["confirmpassword"]?.message}
+        >
           <FormLabel fontWeight={"bold"} my={"3"}>
             confirm password
           </FormLabel>
@@ -102,11 +126,16 @@ const Form = () => {
             placeholder=" confirm password"
             {...register("confirmpassword")}
           />
-
-          <Button my="2" w="100%" type="submit" colorScheme="green">
-            Submit
-          </Button>
+          {errors["confirmpassword"]?.message && (
+            <FormErrorMessage>
+              {errors["confirmpassword"].message as any}
+            </FormErrorMessage>
+          )}
         </FormControl>
+
+        <Button mx="10" my="2" w="100%" type="submit" colorScheme="green">
+          Submit
+        </Button>
       </Flex>
     </form>
   );
